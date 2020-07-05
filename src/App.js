@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { AddCounterBtn, Checkbox, Counters, InputText } from "./components";
+import React, { useEffect } from "react";
+
+import { logRender } from "./utils";
+import { setCounters } from "./store";
+import { useDispatch } from "react-redux";
+
+const colorsFetched = [
+  { color: "#ff9a76" },
+  { color: "#96c0eb" },
+  { color: "#7fff94" }
+];
 
 function App() {
+  logRender("App");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCounters(colorsFetched));
+  }, [ dispatch ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <InputText/>
+      <Checkbox/>
+      <Counters/>
+      <AddCounterBtn/>
     </div>
   );
 }
